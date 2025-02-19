@@ -5,12 +5,16 @@ import { useFormState } from "react-dom";
 import { LoginPresentation } from "./presentation";
 import { loginAction } from "./actions";
 import { initialState } from "@/constants/login.constants";
+import { OptimisticState } from "@/interfaces/login.interfaces";
 
 export function LoginContainer() {
   const [state, formAction] = useFormState(loginAction, initialState);
   const [optimisticState, addOptimistic] = useOptimistic(
     { isSubmitting: false },
-    (state, newState) => ({ ...state, ...newState })
+    (state: OptimisticState, newState: Partial<OptimisticState>) => ({
+      ...state,
+      ...newState,
+    })
   );
 
   async function handleSubmit(formData: FormData) {

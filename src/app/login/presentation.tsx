@@ -1,5 +1,4 @@
 import React from "react";
-import { LoginPresentationProps } from "./types";
 
 export const LoginPresentation: React.FC<{
   formAction: (formData: FormData) => Promise<void>;
