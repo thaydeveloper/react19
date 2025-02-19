@@ -1,28 +1,29 @@
 "use client";
 
-import React, { useState } from "react";
+import { useOptimistic } from "react";
+import { useFormState } from "react-dom";
 import { LoginPresentation } from "./presentation";
+import { loginAction } from "./actions";
+import { initialState } from "@/constants/login.constants";
 
-const LoginContainer: React.FC = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+export function LoginContainer() {
+  const [state, formAction] = useFormState(loginAction, initialState);
+  const [optimisticState, addOptimistic] = useOptimistic(
+    { isSubmitting: false },
+    (state, newState) => ({ ...state, ...newState })
+  );
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // Aqui você pode inserir a lógica de autenticação com shadcn ou uma API de login.
-    console.log("Email:", email);
-    console.log("Senha:", password);
-  };
+  async function handleSubmit(formData: FormData) {
+    addOptimistic({ isSubmitting: true });
+    await formAction(formData);
+    addOptimistic({ isSubmitting: false });
+  }
 
   return (
     <LoginPresentation
-      email={email}
-      password={password}
-      onEmailChange={setEmail}
-      onPasswordChange={setPassword}
-      onSubmit={handleSubmit}
+      formAction={handleSubmit}
+      isSubmitting={optimisticState.isSubmitting}
+      error={!state.success ? state.message : null}
     />
   );
-};
-
-export default LoginContainer;
+}
