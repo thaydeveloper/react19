@@ -1,7 +1,6 @@
 "use client";
 
-import { useOptimistic } from "react";
-import { useFormState } from "react-dom";
+import { useOptimistic, useActionState } from "react";
 import { LoginPresentation } from "./presentation";
 import { loginAction } from "./actions";
 import { initialState } from "@/constants/login.constants";
@@ -10,7 +9,7 @@ import { useRouter } from "next/navigation";
 
 export function LoginContainer() {
   const router = useRouter();
-  const [state, formAction] = useFormState(loginAction, initialState);
+  const [state, , isPending] = useActionState(loginAction, initialState);
   const [optimisticState, addOptimistic] = useOptimistic(
     { isSubmitting: false },
     (state: OptimisticState, newState: Partial<OptimisticState>) => ({
@@ -21,22 +20,27 @@ export function LoginContainer() {
 
   async function handleSubmit(formData: FormData) {
     addOptimistic({ isSubmitting: true });
-    const response = await formAction(formData);
-    console.log("Resposta recebida: no container", response);
 
-    // if (response?.data) {
-    //   // Salvamos o token no localStorage aqui no cliente
-    //   localStorage.setItem("token", response.data.token);
-    //   router.push("/dashboard"); // ou para onde você quiser redirecionar após o login
-    // }
+    try {
+      const result = await loginAction(initialState, formData);
 
-    addOptimistic({ isSubmitting: false });
+      if (result?.success && result.data) {
+        localStorage.setItem("token", result.data.token);
+        router.push("/login");
+      }
+
+      console.log("Resposta do login:", result);
+    } catch (error) {
+      console.error("Erro no login:", error);
+    } finally {
+      addOptimistic({ isSubmitting: false });
+    }
   }
 
   return (
     <LoginPresentation
       formAction={handleSubmit}
-      isSubmitting={optimisticState.isSubmitting}
+      isSubmitting={optimisticState.isSubmitting || isPending}
       error={!state.success ? state.message : null}
     />
   );

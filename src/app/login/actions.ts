@@ -23,6 +23,7 @@ export async function loginAction(
       email: email as string,
       password: password as string,
     });
+    console.log("Resposta recebida: no action", result);
 
     return {
       success: true,

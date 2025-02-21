@@ -12,5 +12,5 @@ export interface LoginState {
   };
 }
 export interface OptimisticState {
-  isSubmitting: boolean;
+  isSubmitting: boolean | null;
 }
