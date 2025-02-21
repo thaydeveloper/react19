@@ -1,5 +1,6 @@
 "use server";
 
+import { AuthService } from "@/api/auth.service";
 import { LoginState } from "@/interfaces/login.interfaces";
 
 export async function loginAction(
@@ -9,19 +10,41 @@ export async function loginAction(
   try {
     const email = formData.get("email");
     const password = formData.get("password");
-    console.log(email, password);
 
-    // Implemente sua lógica de autenticação aqui
-    // const result = await authenticate(email, password)
+    if (!email || !password) {
+      return {
+        success: false,
+        message: "Email e senha são obrigatórios",
+        error: null,
+      };
+    }
+
+    const result = await AuthService.login({
+      email: email as string,
+      password: password as string,
+    });
 
     return {
       success: true,
       message: "Login realizado com sucesso",
+      data: result,
     };
-  } catch (error) {
+  } catch (error: any) {
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message ||
+      "Erro ao realizar login";
+
+    console.error("LoginAction - Erro completo:", {
+      message: errorMessage,
+      status: error.response?.status,
+      data: error.response?.data,
+    });
+
     return {
       success: false,
-      message: "Erro ao realizar login",
+      message: errorMessage,
+      error: error as Error,
     };
   }
 }
