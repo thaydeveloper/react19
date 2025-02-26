@@ -1,5 +1,17 @@
+import { Suspense } from "react";
 import { DashboardContainer } from "./dashboard.container";
+import { LoadingSpinner } from "@/components/loading";
 
 export default function DashboardPage() {
-  return <DashboardContainer />;
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center">
+          <LoadingSpinner />
+        </div>
+      }
+    >
+      <DashboardContainer />
+    </Suspense>
+  );
 }

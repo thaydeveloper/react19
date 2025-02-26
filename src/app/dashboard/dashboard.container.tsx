@@ -1,23 +1,33 @@
 "use client";
 
-import { Suspense, use } from "react";
-import { CarService } from "@/api/car.service";
+import { useActionState, useEffect, startTransition } from "react";
 import { DashboardPresentation } from "./dashboard";
+import { getCarsAction } from "./actions.dashboard";
 
-async function fetchCars() {
-  try {
-    return await CarService.getAll();
-  } catch (error: any) {
-    throw new Error(error.message || "Erro ao buscar carros");
-  }
-}
+const initialState = {
+  cars: [],
+  error: null,
+  success: true,
+};
 
 export function DashboardContainer() {
-  const cars = use(fetchCars());
+  const [state, dispatch, isPending] = useActionState(
+    getCarsAction,
+    initialState
+  );
+
+  useEffect(() => {
+    startTransition(() => {
+      dispatch();
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <DashboardPresentation cars={cars} loading={true} error={null} />;
-    </Suspense>
+    <DashboardPresentation
+      cars={state.cars}
+      error={state.error}
+      loading={isPending}
+    />
   );
 }

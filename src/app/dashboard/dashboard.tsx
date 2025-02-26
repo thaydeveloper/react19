@@ -1,3 +1,5 @@
+import { LoadingSpinner } from "@/components/loading";
+
 interface DashboardProps {
   cars: Car[];
   loading: boolean;
@@ -10,7 +12,11 @@ export function DashboardPresentation({
   error,
 }: DashboardProps) {
   if (loading) {
-    return <div>Carregando...</div>;
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <LoadingSpinner />
+      </div>
+    );
   }
 
   if (error) {
@@ -29,15 +35,17 @@ export function DashboardPresentation({
               <th className="px-4 py-2 border">Marca</th>
               <th className="px-4 py-2 border">Ano</th>
               <th className="px-4 py-2 border">Cor</th>
+              <th className="px-4 py-2 border">Valor</th>
             </tr>
           </thead>
           <tbody>
             {cars.map((car) => (
               <tr key={car.id} className="hover:bg-gray-50">
-                <td className="px-4 py-2 border">{car.model}</td>
-                <td className="px-4 py-2 border">{car.brand}</td>
-                <td className="px-4 py-2 border">{car.year}</td>
-                <td className="px-4 py-2 border">{car.color}</td>
+                <td className="px-4 py-2 border">{car.modelo}</td>
+                <td className="px-4 py-2 border">{car.marca}</td>
+                <td className="px-4 py-2 border">{car.ano}</td>
+                <td className="px-4 py-2 border">{car.cor}</td>
+                <td className="px-4 py-2 border">{car.valor}</td>
               </tr>
             ))}
           </tbody>

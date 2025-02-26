@@ -26,10 +26,9 @@ export function LoginContainer() {
 
       if (result?.success && result.data) {
         localStorage.setItem("token", result.data.token);
-        router.push("/login");
+        document.cookie = `auth_token=${result.data.token}; path=/`;
+        router.push("/dashboard");
       }
-
-      console.log("Resposta do login:", result);
     } catch (error) {
       console.error("Erro no login:", error);
     } finally {

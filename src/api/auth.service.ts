@@ -32,15 +32,23 @@ export class AuthService {
   }
 
   static logout(): void {
-    localStorage.removeItem("token");
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("token");
+    }
   }
 
   static isAuthenticated(): boolean {
-    const token = localStorage.getItem("token");
-    return !!token;
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("token");
+      return !!token;
+    }
+    return false;
   }
 
   static getToken(): string | null {
-    return localStorage.getItem("token");
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("token");
+    }
+    return null;
   }
 }

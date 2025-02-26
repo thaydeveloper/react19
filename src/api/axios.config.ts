@@ -4,6 +4,8 @@ const api = axios.create({
   baseURL: "http://localhost:3000/api/",
   headers: {
     "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
   },
   timeout: 10000,
 });
@@ -12,6 +14,24 @@ const api = axios.create({
 api.interceptors.request.use(
   (config) => {
     console.log("Request Data:", config.data);
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// Modificando o interceptor de token
+api.interceptors.request.use(
+  (config) => {
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("token");
+      if (token && token !== "null") {
+        config.headers.Authorization = `Bearer ${token}`;
+      } else {
+        delete config.headers.Authorization;
+      }
+    }
     return config;
   },
   (error) => {
