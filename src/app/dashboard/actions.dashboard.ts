@@ -1,8 +1,8 @@
-"use server";
+'use server';
 
-import { CarService } from "@/api/car.service";
-import { cookies } from "next/headers";
-import { Car } from "@/interfaces/car.interfaces";
+import { CarService } from '../../api/car.service';
+import { cookies } from 'next/headers';
+import { Car } from '../../interfaces/car.interfaces';
 
 interface DashboardState {
   cars: Car[];
@@ -13,12 +13,12 @@ interface DashboardState {
 export async function getCarsAction(): Promise<DashboardState> {
   try {
     const cookieStore = await cookies();
-    const token = cookieStore.get("auth_token");
+    const token = cookieStore.get('auth_token');
 
     if (!token) {
       return {
         cars: [],
-        error: "Não autorizado",
+        error: 'Não autorizado',
         success: false,
       };
     }
@@ -33,7 +33,7 @@ export async function getCarsAction(): Promise<DashboardState> {
   } catch (error) {
     return {
       cars: [],
-      error: error instanceof Error ? error.message : "Erro desconhecido",
+      error: error instanceof Error ? error.message : 'Erro desconhecido',
       success: false,
     };
   }

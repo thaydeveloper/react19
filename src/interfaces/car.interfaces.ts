@@ -1,8 +1,8 @@
 export interface Car {
-  id: string;
+  id: string | number;
   modelo: string;
   marca: string;
   ano: number;
   cor: string;
-  valor: string;
+  valor: string | number;
 }

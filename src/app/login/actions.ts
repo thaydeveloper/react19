@@ -1,7 +1,7 @@
 'use server';
 
-import { AuthService } from '@/api/auth.service';
-import { LoginState } from '@/interfaces/login.interfaces';
+import { AuthService } from '../../api/auth.service';
+import { LoginState } from '../../interfaces/login.interfaces';
 
 interface ApiError {
   response?: {

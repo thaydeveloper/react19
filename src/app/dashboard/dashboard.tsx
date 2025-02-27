@@ -1,5 +1,5 @@
-import { LoadingSpinner } from '@/components/loading';
-import { Car } from '@/interfaces/car.interfaces';
+import { LoadingSpinner } from '../../components/loading';
+import { Car } from '../../interfaces/car.interfaces';
 
 interface DashboardProps {
   cars: Car[];
@@ -15,6 +15,7 @@ export function DashboardPresentation({
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
+        <span aria-label="Carregando">Carregando</span>
         <LoadingSpinner />
       </div>
     );

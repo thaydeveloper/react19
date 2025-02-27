@@ -1,10 +1,10 @@
-import api from "./axios.config";
-import { Car } from "@/interfaces/car.interfaces";
+import api from './axios.config';
+import { Car } from '../interfaces/car.interfaces';
 
 export class CarService {
   static async getAll(token?: string): Promise<Car[]> {
     try {
-      const response = await api.get<Car[]>("car", {
+      const response = await api.get<Car[]>('car', {
         headers: token
           ? {
               Authorization: `Bearer ${token}`,
@@ -14,7 +14,7 @@ export class CarService {
 
       return response.data;
     } catch (error) {
-      console.error("Erro ao buscar carros:", error);
+      console.error('Erro ao buscar carros:', error);
       throw error;
     }
   }

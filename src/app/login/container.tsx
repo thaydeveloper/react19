@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useOptimistic, useActionState } from "react";
-import { LoginPresentation } from "./login";
-import { loginAction } from "./actions";
-import { initialState } from "@/constants/login.constants";
-import { OptimisticState } from "@/interfaces/login.interfaces";
-import { useRouter } from "next/navigation";
+import { useOptimistic, useActionState } from 'react';
+import { LoginPresentation } from './login';
+import { loginAction } from './actions';
+import { initialState } from '../../constants/login.constants';
+import { OptimisticState } from '../../interfaces/login.interfaces';
+import { useRouter } from 'next/navigation';
 
 export function LoginContainer() {
   const router = useRouter();
@@ -15,7 +15,7 @@ export function LoginContainer() {
     (state: OptimisticState, newState: Partial<OptimisticState>) => ({
       ...state,
       ...newState,
-    })
+    }),
   );
 
   async function handleSubmit(formData: FormData) {
@@ -25,12 +25,12 @@ export function LoginContainer() {
       const result = await loginAction(initialState, formData);
 
       if (result?.success && result.data) {
-        localStorage.setItem("token", result.data.token);
+        localStorage.setItem('token', result.data.token);
         document.cookie = `auth_token=${result.data.token}; path=/`;
-        router.push("/dashboard");
+        router.push('/dashboard');
       }
     } catch (error) {
-      console.error("Erro no login:", error);
+      console.error('Erro no login:', error);
     } finally {
       addOptimistic({ isSubmitting: false });
     }
