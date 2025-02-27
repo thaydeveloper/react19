@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc && vite build",
     "test": "jest",
-    "lint": "eslint src --ext .ts,.tsx",
+    "lint": "eslint src",
     "tsc": "tsc --noEmit",
     "prepare": "husky install"
   },
@@ -13,21 +13,26 @@
     "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "commitizen": "^4.3.1",
+    "cz-conventional-changelog": "^3.3.0",
     "lucide-react": "^0.475.0",
     "next": "15.1.7",
+    "prettier": "^3.5.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwind-merge": "^3.0.1",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.7.1",
+    "@commitlint/config-conventional": "^19.7.1",
     "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.1.7",
-    "husky": "^9.1.7",
+    "eslint-config-next": "^15.2.0",
+    "husky": "^8.0.0",
     "lint-staged": "^15.4.3",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
@@ -39,9 +44,9 @@
       "prettier --write"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
     }
   }
 }
