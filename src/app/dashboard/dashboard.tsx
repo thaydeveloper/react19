@@ -1,4 +1,5 @@
-import { LoadingSpinner } from "@/components/loading";
+import { LoadingSpinner } from '@/components/loading';
+import { Car } from '@/interfaces/car.interfaces';
 
 interface DashboardProps {
   cars: Car[];
@@ -39,7 +40,7 @@ export function DashboardPresentation({
             </tr>
           </thead>
           <tbody>
-            {cars.map((car) => (
+            {cars.map(car => (
               <tr key={car.id} className="hover:bg-gray-50">
                 <td className="px-4 py-2 border">{car.modelo}</td>
                 <td className="px-4 py-2 border">{car.marca}</td>
