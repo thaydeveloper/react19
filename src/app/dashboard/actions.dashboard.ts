@@ -10,9 +10,7 @@ interface DashboardState {
   success: boolean;
 }
 
-export async function getCarsAction(
-  state: DashboardState
-): Promise<DashboardState> {
+export async function getCarsAction(): Promise<DashboardState> {
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get("auth_token");
