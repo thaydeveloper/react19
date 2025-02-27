@@ -1,20 +1,30 @@
-"use server";
+'use server';
 
-import { AuthService } from "@/api/auth.service";
-import { LoginState } from "@/interfaces/login.interfaces";
+import { AuthService } from '@/api/auth.service';
+import { LoginState } from '@/interfaces/login.interfaces';
+
+interface ApiError {
+  response?: {
+    data?: {
+      message?: string;
+    };
+    status?: number;
+  };
+  message?: string;
+}
 
 export async function loginAction(
   prevState: LoginState,
-  formData: FormData
+  formData: FormData,
 ): Promise<LoginState> {
   try {
-    const email = formData.get("email");
-    const password = formData.get("password");
+    const email = formData.get('email');
+    const password = formData.get('password');
 
     if (!email || !password) {
       return {
         success: false,
-        message: "Email e senha são obrigatórios",
+        message: 'Email e senha são obrigatórios',
         error: null,
       };
     }
@@ -23,23 +33,22 @@ export async function loginAction(
       email: email as string,
       password: password as string,
     });
-    console.log("Resposta recebida: no action", result);
+    console.log('Resposta recebida: no action', result);
 
     return {
       success: true,
-      message: "Login realizado com sucesso",
+      message: 'Login realizado com sucesso',
       data: result,
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     const errorMessage =
-      error.response?.data?.message ||
-      error.message ||
-      "Erro ao realizar login";
+      (error as ApiError).response?.data?.message ||
+      (error as Error).message ||
+      'Erro ao realizar login';
 
-    console.error("LoginAction - Erro completo:", {
+    console.error('LoginAction - Erro completo:', {
       message: errorMessage,
-      status: error.response?.status,
-      data: error.response?.data,
+      // Se você tiver mais informações no erro, você pode acessá-las aqui
     });
 
     return {
