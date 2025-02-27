@@ -1,4 +1,4 @@
-import { LoginState } from "@/interfaces/login.interfaces";
+import { LoginState } from '../interfaces/login.interfaces';
 
 export const initialState: LoginState = {
   message: null,
