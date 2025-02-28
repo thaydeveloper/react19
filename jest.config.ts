@@ -4,11 +4,15 @@ const config: Config = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   transform: {
-    '^.+\\.tsx?$': 'ts-jest',
+    '^.+\\.(js|jsx|ts|tsx)$': [
+      'babel-jest',
+      { configFile: './config/jest/babel.config.js' },
+    ],
   },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
-  transformIgnorePatterns: ['<rootDir>/node_modules/(?!@your-library)'],
+  setupFilesAfterEnv: ['./jest.setup.ts'],
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+  },
 };
 
 export default config;

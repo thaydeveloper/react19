@@ -1,10 +1,7 @@
-
-cat > config/jest/babel.config.js << 'EOL'
 module.exports = {
   presets: [
     ['@babel/preset-env', { targets: { node: 'current' } }],
     '@babel/preset-typescript',
-    ['@babel/preset-react', { runtime: 'automatic' }]
+    ['@babel/preset-react', { runtime: 'automatic' }],
   ],
 };
-EOL
