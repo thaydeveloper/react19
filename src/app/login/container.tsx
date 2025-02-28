@@ -33,8 +33,12 @@ export function LoginContainer() {
       } else {
         setError(result.message);
       }
-    } catch (e) {
-      setError('Ocorreu um erro ao processar a requisição');
+    } catch (error) {
+      setError(
+        error instanceof Error
+          ? error.message
+          : 'Erro inesperado ao fazer login',
+      );
     } finally {
       setIsSubmitting(false);
     }

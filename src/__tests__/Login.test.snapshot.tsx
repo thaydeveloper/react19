@@ -7,14 +7,22 @@ describe('LoginPresentation Snapshots', () => {
 
   test('deve corresponder ao snapshot no estado inicial', () => {
     const { container } = render(
-      <LoginPresentation formAction={mockFormAction} isSubmitting={false} />,
+      <LoginPresentation
+        formAction={mockFormAction}
+        isSubmitting={false}
+        error={null}
+      />,
     );
     expect(container).toMatchSnapshot();
   });
 
   test('deve corresponder ao snapshot no estado de carregamento', () => {
     const { container } = render(
-      <LoginPresentation formAction={mockFormAction} isSubmitting={true} />,
+      <LoginPresentation
+        formAction={mockFormAction}
+        isSubmitting={true}
+        error={null}
+      />,
     );
     expect(container).toMatchSnapshot();
   });
@@ -27,10 +35,7 @@ describe('LoginPresentation Snapshots', () => {
         error="Email ou senha inválidos"
       />,
     );
-    // Após as correções, execute 'yarn test -u' para atualizar os snapshots
+
     expect(container).toMatchSnapshot();
   });
 });
-
-// Após fazer as alterações, execute o comando para atualizar os snapshots:
-// yarn test -u
