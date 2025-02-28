@@ -1,16 +1,17 @@
 export interface LoginState {
-  message: string | null;
   success: boolean;
-  error?: Error | null;
+  message: string;
+  error: Error | null;
   data?: {
-    token: string;
-    user: {
-      id: string;
-      email: string;
-      name: string;
-    };
+    token?: string;
   };
 }
+
+export interface LoginCredentials {
+  email: string;
+  password: string;
+}
+
 export interface OptimisticState {
   isSubmitting: boolean | null;
 }

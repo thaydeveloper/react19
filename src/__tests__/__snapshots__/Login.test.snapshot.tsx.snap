@@ -1,0 +1,195 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginPresentation Snapshots deve corresponder ao snapshot no estado de carregamento 1`] = `
+<div>
+  <div
+    class="flex min-h-screen items-center justify-center bg-gray-100 p-4"
+  >
+    <div
+      class="w-full max-w-md rounded-lg bg-white p-8 shadow-lg"
+    >
+      <h2
+        class="mb-6 text-center text-3xl font-bold text-gray-900"
+      >
+        Login
+      </h2>
+      <form
+        action="javascript:throw new Error('A React form was unexpectedly submitted. If you called form.submit() manually, consider using form.requestSubmit() instead. If you\\'re trying to use event.stopPropagation() in a submit event handler, consider also calling event.preventDefault().')"
+        class="space-y-4"
+        data-testid="login-form"
+      >
+        <div>
+          <label
+            class="block text-sm font-medium text-gray-700"
+            for="email"
+          >
+            Email
+          </label>
+          <input
+            class="mt-2 block w-full h-[50px] p-[10px] rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            id="email"
+            name="email"
+            placeholder="Digite seu email"
+            required=""
+            type="email"
+          />
+        </div>
+        <div>
+          <label
+            class="block text-sm font-medium text-gray-700"
+            for="password"
+          >
+            Senha
+          </label>
+          <input
+            class="mt-1 block w-full h-[50px] p-[10px] rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            id="password"
+            name="password"
+            placeholder="Digite sua senha"
+            required=""
+            type="password"
+          />
+        </div>
+        <button
+          class="mt-4 w-full rounded-md bg-blue-600 py-2 px-4 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-blue-300"
+          disabled=""
+          type="submit"
+        >
+          Entrando...
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`LoginPresentation Snapshots deve corresponder ao snapshot no estado inicial 1`] = `
+<div>
+  <div
+    class="flex min-h-screen items-center justify-center bg-gray-100 p-4"
+  >
+    <div
+      class="w-full max-w-md rounded-lg bg-white p-8 shadow-lg"
+    >
+      <h2
+        class="mb-6 text-center text-3xl font-bold text-gray-900"
+      >
+        Login
+      </h2>
+      <form
+        action="javascript:throw new Error('A React form was unexpectedly submitted. If you called form.submit() manually, consider using form.requestSubmit() instead. If you\\'re trying to use event.stopPropagation() in a submit event handler, consider also calling event.preventDefault().')"
+        class="space-y-4"
+        data-testid="login-form"
+      >
+        <div>
+          <label
+            class="block text-sm font-medium text-gray-700"
+            for="email"
+          >
+            Email
+          </label>
+          <input
+            class="mt-2 block w-full h-[50px] p-[10px] rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            id="email"
+            name="email"
+            placeholder="Digite seu email"
+            required=""
+            type="email"
+          />
+        </div>
+        <div>
+          <label
+            class="block text-sm font-medium text-gray-700"
+            for="password"
+          >
+            Senha
+          </label>
+          <input
+            class="mt-1 block w-full h-[50px] p-[10px] rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            id="password"
+            name="password"
+            placeholder="Digite sua senha"
+            required=""
+            type="password"
+          />
+        </div>
+        <button
+          class="mt-4 w-full rounded-md bg-blue-600 py-2 px-4 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-blue-300"
+          type="submit"
+        >
+          Entrar
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`LoginPresentation Snapshots deve corresponder ao snapshot quando há erro 1`] = `
+<div>
+  <div
+    class="flex min-h-screen items-center justify-center bg-gray-100 p-4"
+  >
+    <div
+      class="w-full max-w-md rounded-lg bg-white p-8 shadow-lg"
+    >
+      <h2
+        class="mb-6 text-center text-3xl font-bold text-gray-900"
+      >
+        Login
+      </h2>
+      <div
+        class="mb-4 rounded-md bg-red-50 p-4 text-red-700"
+        data-testid="error-message"
+        role="alert"
+      >
+        Email ou senha inválidos
+      </div>
+      <form
+        action="javascript:throw new Error('A React form was unexpectedly submitted. If you called form.submit() manually, consider using form.requestSubmit() instead. If you\\'re trying to use event.stopPropagation() in a submit event handler, consider also calling event.preventDefault().')"
+        class="space-y-4"
+        data-testid="login-form"
+      >
+        <div>
+          <label
+            class="block text-sm font-medium text-gray-700"
+            for="email"
+          >
+            Email
+          </label>
+          <input
+            class="mt-2 block w-full h-[50px] p-[10px] rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            id="email"
+            name="email"
+            placeholder="Digite seu email"
+            required=""
+            type="email"
+          />
+        </div>
+        <div>
+          <label
+            class="block text-sm font-medium text-gray-700"
+            for="password"
+          >
+            Senha
+          </label>
+          <input
+            class="mt-1 block w-full h-[50px] p-[10px] rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            id="password"
+            name="password"
+            placeholder="Digite sua senha"
+            required=""
+            type="password"
+          />
+        </div>
+        <button
+          class="mt-4 w-full rounded-md bg-blue-600 py-2 px-4 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-blue-300"
+          type="submit"
+        >
+          Entrar
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+`;

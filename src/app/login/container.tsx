@@ -1,46 +1,50 @@
 'use client';
 
-import { useOptimistic, useActionState } from 'react';
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { LoginPresentation } from './login';
 import { loginAction } from './actions';
-import { initialState } from '../../constants/login.constants';
-import { OptimisticState } from '../../interfaces/login.interfaces';
-import { useRouter } from 'next/navigation';
+import { LoginState } from '../../interfaces/login.interfaces';
 
 export function LoginContainer() {
   const router = useRouter();
-  const [state, , isPending] = useActionState(loginAction, initialState);
-  const [optimisticState, addOptimistic] = useOptimistic(
-    { isSubmitting: false },
-    (state: OptimisticState, newState: Partial<OptimisticState>) => ({
-      ...state,
-      ...newState,
-    }),
-  );
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  async function handleSubmit(formData: FormData) {
-    addOptimistic({ isSubmitting: true });
+  const initialState: LoginState = {
+    success: false,
+    message: '',
+    error: null,
+  };
+
+  const handleFormAction = async (formData: FormData) => {
+    setIsSubmitting(true);
+    setError(null);
 
     try {
       const result = await loginAction(initialState, formData);
 
-      if (result?.success && result.data) {
-        localStorage.setItem('token', result.data.token);
-        document.cookie = `auth_token=${result.data.token}; path=/`;
+      if (result.success) {
+        // Guardar token
+        if (result.data?.token) {
+          localStorage.setItem('token', result.data.token);
+        }
         router.push('/dashboard');
+      } else {
+        setError(result.message);
       }
-    } catch (error) {
-      console.error('Erro no login:', error);
+    } catch (e) {
+      setError('Ocorreu um erro ao processar a requisição');
     } finally {
-      addOptimistic({ isSubmitting: false });
+      setIsSubmitting(false);
     }
-  }
+  };
 
   return (
     <LoginPresentation
-      formAction={handleSubmit}
-      isSubmitting={optimisticState.isSubmitting || isPending}
-      error={!state.success ? state.message : null}
+      formAction={handleFormAction}
+      isSubmitting={isSubmitting}
+      error={error}
     />
   );
 }
